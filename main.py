@@ -1,22 +1,20 @@
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import util
+from google.appengine.ext import webapp2
 
-
-class MainHandler(webapp.RequestHandler):
+class SetHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.out.write('Hello world!')
+        self.response.write('Setting!')
+        set()
+
+class SetHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('Getting!')
+
+app = webapp2.WSGIApplication([
+    ('/set', SetHandler),
+    ('/get/', GetHandler)
+], debug=True)
 
 def set():
   print("setting target datetime")
   timestamp = long(self.request.get_all("timestamp"))
   _Timestamp.Save(timestamp)
-
-def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
-                                         debug=True)
-    util.run_wsgi_app(application)
-
-
-if __name__ == '__main__':
-    main()
-
