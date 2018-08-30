@@ -4,7 +4,7 @@ from models import _Timestamp
 class SetHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Setting!')
-        params = self.request.get_all('timestamp')
+        params = self.request.get_all('datetime')
         if params:
             timestamp = long(params[0])
             print 'saving {}'.format(timestamp)
