@@ -18,7 +18,7 @@ class GetHandler(webapp2.RequestHandler):
             self.response.write('datetime={}'.format(timestamp.datetime))
 
 app = webapp2.WSGIApplication([
-    ('/set', SetHandler),
-    ('/get', GetHandler)
+    ('/settarget', SetHandler),
+    ('/gettarget', GetHandler)
 ], debug=True)
 
