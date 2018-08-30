@@ -25,14 +25,18 @@ class _Timestamp(ndb.Model):
       entities.append(instance)
       print("found: {}".format(instance))
     print("Found {} instances".format(len(entities)))
-    return entities
+    if entities:
+      return entities[0]
+    else:
+      return None
 
-  @staticmethod
-  def Save(timestamp):
+  @classmethod
+  def Save(cls, timestamp):
     cls.Delete()
     cls.Add(timestamp)
 
-  def Add(timestamp):
+  @classmethod
+  def Add(cls, timestamp):
     persisted_value = _Timestamp(datetime=timestamp)
     key = persisted_value.put()
     print("Added {}".format(key))

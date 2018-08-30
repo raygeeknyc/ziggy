@@ -1,20 +1,23 @@
-from google.appengine.ext import webapp2
+import webapp2
+from models import _Timestamp
 
 class SetHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Setting!')
-        set()
+        params = self.request.get_all('timestamp')
+        if params:
+            timestamp = long(params[0])
+            print 'saving {}'.format(timestamp)
+            _Timestamp.Save(timestamp)
 
-class SetHandler(webapp2.RequestHandler):
+class GetHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Getting!')
+        timestamp = _Timestamp.Get()
+        print 'got timestamp: {}'.format(timestamp)
 
 app = webapp2.WSGIApplication([
     ('/set', SetHandler),
-    ('/get/', GetHandler)
+    ('/get', GetHandler)
 ], debug=True)
 
-def set():
-  print("setting target datetime")
-  timestamp = long(self.request.get_all("timestamp"))
-  _Timestamp.Save(timestamp)
