@@ -12,9 +12,10 @@ class SetHandler(webapp2.RequestHandler):
 
 class GetHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Getting!')
         timestamp = _Timestamp.Get()
-        print 'got timestamp: {}'.format(timestamp)
+        if timestamp:
+            print 'got timestamp: {}'.format(timestamp)
+            self.response.write('datetime={}'.format(timestamp.datetime))
 
 app = webapp2.WSGIApplication([
     ('/set', SetHandler),
