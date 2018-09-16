@@ -1,7 +1,7 @@
 import sys
 from google.appengine.ext import ndb
 
-DEFAULT_DELAY_SECONDS = 10
+DEFAULT_DELAY_MS = 10000
 DEFAULT_TIMESTAMP = 1520985600000  # Midnight, 3/14/2018 
 
 class _Timestamp(ndb.Model):
@@ -45,7 +45,7 @@ class _Timestamp(ndb.Model):
     print("Added {}".format(key))
 
 class _Delay(ndb.Model):
-  seconds = ndb.IntegerProperty()
+  ms = ndb.IntegerProperty()
 
   @classmethod
   def Delete(cls):
@@ -80,9 +80,9 @@ class _Delay(ndb.Model):
 
   @classmethod
   def Add(cls, delay):
-    persisted_value = _Delay(seconds=delay)
+    persisted_value = _Delay(ms=delay)
     key = persisted_value.put()
     print("Added {}".format(key))
 
-_Delay.Save(DEFAULT_DELAY_SECONDS)
+_Delay.Save(DEFAULT_DELAY_MS)
 _Timestamp.Save(DEFAULT_TIMESTAMP)

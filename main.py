@@ -22,7 +22,7 @@ class GetDelayHandler(webapp2.RequestHandler):
         delay = _Delay.Get()
         if delay:
             print 'got delay: {}'.format(delay)
-            self.response.write('delay={}\n'.format(delay.seconds))
+            self.response.write('delay={}\n'.format(delay.ms))
 
 app = webapp2.WSGIApplication([
     ('/settarget', SetTargetHandler),
