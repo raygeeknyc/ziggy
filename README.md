@@ -1,4 +1,4 @@
 # ziggy
-The time spirit
+![Wayback Machine](wwww-one-pager.png?raw=true "Wayback Machine Overview")
 
-The cloud presence for the different mechanisms of the Weather Wayback machine
+The time spirit - Ziggy stores the target date and time for the different mechanisms of the World Wide Weather Wayback Machine
