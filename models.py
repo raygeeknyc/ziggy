@@ -2,7 +2,7 @@ import sys
 import time
 from google.appengine.ext import ndb
 
-DEFAULT_DELAY_MS = 10000
+DEFAULT_DELAY_MS = 60000
 DEFAULT_TIMESTAMP = 1520985600# Midnight, 3/14/2018 
 
 class _Timestamp(ndb.Model):
