@@ -1,11 +1,13 @@
 import sys
+import time
 from google.appengine.ext import ndb
 
 DEFAULT_DELAY_MS = 10000
-DEFAULT_TIMESTAMP = 1520985600000  # Midnight, 3/14/2018 
+DEFAULT_TIMESTAMP = 1520985600# Midnight, 3/14/2018 
 
 class _Timestamp(ndb.Model):
   datetime = ndb.IntegerProperty()
+  when = ndb.IntegerProperty()
 
   @classmethod
   def Delete(cls):
@@ -40,7 +42,7 @@ class _Timestamp(ndb.Model):
 
   @classmethod
   def Add(cls, timestamp):
-    persisted_value = _Timestamp(datetime=timestamp)
+    persisted_value = _Timestamp(datetime=timestamp, when=long(time.time()))
     key = persisted_value.put()
     print("Added {}".format(key))
 

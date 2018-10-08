@@ -1,5 +1,9 @@
 import webapp2
+import time
 from models import _Timestamp, _Delay
+
+TIMESTAMP_SET_LIFETIME_MINS = 3
+_TIMESTAMP_SET_LIFETIME_SECS = TIMESTAMP_SET_LIFETIME_MINS  * 60
 
 class SetTargetHandler(webapp2.RequestHandler):
     def get(self):
@@ -12,10 +16,16 @@ class SetTargetHandler(webapp2.RequestHandler):
 
 class GetTargetHandler(webapp2.RequestHandler):
     def get(self):
-        timestamp = _Timestamp.Get()
-        if timestamp:
-            print 'got timestamp: {}'.format(timestamp)
-            self.response.write('datetime={}\n'.format(timestamp.datetime))
+        target = _Timestamp.Get()
+        if target:
+            print 'got target: {}'.format(target)
+            if (time.time() - target.when) > _TIMESTAMP_SET_LIFETIME_SECS:
+                print 'target expired, returning current time'
+                now = long(time.time())
+                timestamp = now
+            else:
+                timestamp=target.datetime
+        self.response.write('datetime={}\n'.format(timestamp))
 
 class GetDelayHandler(webapp2.RequestHandler):
     def get(self):
